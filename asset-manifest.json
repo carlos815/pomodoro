@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/pomodoro/static/css/main.3a22de88.chunk.css",
+    "main.js": "/pomodoro/static/js/main.f9de09bb.chunk.js",
+    "main.js.map": "/pomodoro/static/js/main.f9de09bb.chunk.js.map",
+    "runtime-main.js": "/pomodoro/static/js/runtime-main.024a2295.js",
+    "runtime-main.js.map": "/pomodoro/static/js/runtime-main.024a2295.js.map",
+    "static/js/2.1dc31826.chunk.js": "/pomodoro/static/js/2.1dc31826.chunk.js",
+    "static/js/2.1dc31826.chunk.js.map": "/pomodoro/static/js/2.1dc31826.chunk.js.map",
+    "index.html": "/pomodoro/index.html",
+    "static/css/main.3a22de88.chunk.css.map": "/pomodoro/static/css/main.3a22de88.chunk.css.map",
+    "static/js/2.1dc31826.chunk.js.LICENSE.txt": "/pomodoro/static/js/2.1dc31826.chunk.js.LICENSE.txt",
+    "static/media/beep.6e598eb3.wav": "/pomodoro/static/media/beep.6e598eb3.wav",
+    "static/media/App.scss": "/pomodoro/static/media/digital-numbers.807e5d85.otf",
+    "static/media/digital-tone.44c98622.wav": "/pomodoro/static/media/digital-tone.44c98622.wav",
+    "static/media/play-icon.30f2e1b5.svg": "/pomodoro/static/media/play-icon.30f2e1b5.svg",
+    "static/media/pomodoro-tl.e1a09aa2.svg": "/pomodoro/static/media/pomodoro-tl.e1a09aa2.svg",
+    "static/media/rest-icon.0af76b1c.svg": "/pomodoro/static/media/rest-icon.0af76b1c.svg",
+    "static/media/rest-tl.9124bcc7.svg": "/pomodoro/static/media/rest-tl.9124bcc7.svg",
+    "static/media/skip-icon.1f888bce.svg": "/pomodoro/static/media/skip-icon.1f888bce.svg",
+    "static/media/tomato-icon.031bc3ca.svg": "/pomodoro/static/media/tomato-icon.031bc3ca.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.024a2295.js",
+    "static/js/2.1dc31826.chunk.js",
+    "static/css/main.3a22de88.chunk.css",
+    "static/js/main.f9de09bb.chunk.js"
+  ]
+}
