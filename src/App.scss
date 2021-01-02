@@ -33,6 +33,7 @@ body {
   justify-content: space-between;
   flex-direction: column;
   min-height: 100vh;
+  max-width: 90vw;
   display: flex;
 }
 
@@ -60,6 +61,7 @@ h1 {
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 button {
   outline: none;
