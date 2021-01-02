@@ -18,6 +18,8 @@ const initialState = timerAdapter.getInitialState({
     'pomodoro',
     'shortRest',
     'pomodoro',
+    'shortRest',
+    'pomodoro',
     'longRest',
   ],
 })

@@ -251,7 +251,7 @@ button {
     width: 100%;
     justify-content: space-between;
     box-sizing: border-box;
-
+    flex-wrap: wrap;
     &-item {
       margin-right: 3px;
       display: flex;
