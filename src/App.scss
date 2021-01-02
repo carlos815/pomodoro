@@ -221,7 +221,7 @@ button {
       margin: 0;
       //transform: translateY(5px);
       font-variant-numeric: tabular-nums;
-      padding-left: clamp(0px, 3vw, 21px);
+      padding-left: clamp(1px, 3vw, 21px);
       &::before {
         content: '88:88';
         position: absolute;
@@ -236,7 +236,7 @@ button {
 
       font-weight: normal;
       letter-spacing: 16px;
-      letter-spacing: clamp(0px, 2vw, 16px);
+      letter-spacing: clamp(1px, 2vw, 16px);
 
       position: relative;
       text-align: center;
