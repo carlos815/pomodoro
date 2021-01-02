@@ -44,6 +44,7 @@ body {
 h1 {
   font-family: 'Comfortaa', cursive;
   font-size: 36px;
+
   font-style: normal;
   font-weight: 400;
   line-height: 40px;
@@ -218,9 +219,9 @@ button {
     justify-content: space-around;
     & .counter {
       margin: 0;
-      transform: translateY(5px);
+      //transform: translateY(5px);
       font-variant-numeric: tabular-nums;
-      padding-left: 21px;
+      padding-left: clamp(0px, 3vw, 21px);
       &::before {
         content: '88:88';
         position: absolute;
@@ -231,12 +232,17 @@ button {
       }
       font-family: 'DJB Digital';
       font-size: 100px;
+      font-size: clamp(16px, 16vw, 100px);
+
       font-weight: normal;
       letter-spacing: 16px;
+      letter-spacing: clamp(0px, 2vw, 16px);
+
       position: relative;
       text-align: center;
       z-index: 10;
       margin-bottom: -10px;
+      align-self: center;
     }
   }
 
