@@ -19,7 +19,7 @@ if (typeof alarm.loop === 'boolean') {
   )
 }
 
-const unsubscribe = subscribe('timer', (state) => {
+subscribe('timer', (state) => {
   if (state.timer.status === 'ended') {
     alarm.play()
   } else {

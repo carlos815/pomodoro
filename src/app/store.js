@@ -8,4 +8,4 @@ export const store = configureStore({
   reducer: { stopWatch: stopWatchReducer, timer: timerReducer },
 })
 
-const subscribe = initSubscriber(store)
+initSubscriber(store)

@@ -45,6 +45,8 @@ document.addEventListener('keydown', (event) => {
         store.dispatch(start())
       }
       break
+    default:
+      break
   }
   // }
 })
