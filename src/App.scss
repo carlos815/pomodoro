@@ -147,15 +147,15 @@ button {
     }
   }
 }
-.display {
-  @keyframes blinking-screen {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 100%;
-    }
+@keyframes blinkingscreen {
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 100%;
+  }
+}
+.display {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -300,7 +300,7 @@ button {
 
     &.paused,
     &.ended {
-      animation: blinking-screen 2s infinite;
+      animation: blinkingscreen 2s infinite;
       animation-timing-function: steps(2, jump-none);
     }
   }
