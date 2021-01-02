@@ -1,8 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from '@reduxjs/toolkit'
+import { stopWatchReducer } from '../features/stopWatchSlice'
+import { timerReducer } from '../features/timerSlice'
 
-export default configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
-});
+import initSubscriber from 'redux-subscriber'
+
+export const store = configureStore({
+  reducer: { stopWatch: stopWatchReducer, timer: timerReducer },
+})
+
+const subscribe = initSubscriber(store)
