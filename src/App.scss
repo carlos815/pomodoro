@@ -4,7 +4,7 @@ $switchBtnLabelColor: #ff6161;
 $font-color: #bdbdbd;
 $activeColor: #313230;
 $inactiveColor: #a0aa95;
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;700');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300');
 
 @font-face {
@@ -67,6 +67,8 @@ h1 {
 button {
   outline: none;
   cursor: pointer;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 .smallBtn {
   display: flex;
@@ -97,7 +99,7 @@ button {
     background: linear-gradient(145deg, #ffffff, #dadada);
     box-shadow: 6px 6px 11px #c9c9c9, -6px -6px 11px #ffffff;
     transition: all 0.05s linear;
-
+    -webkit-tap-highlight-color: transparent;
     &:active {
       background: linear-gradient(145deg, #dadada, #ffffff);
     }
@@ -116,6 +118,8 @@ button {
   justify-content: center;
   align-items: center;
   transition: all 0.05s linear;
+  -webkit-tap-highlight-color: transparent;
+
   &:active {
     background: linear-gradient(145deg, #dadada, #ffffff);
     box-shadow: none;
@@ -149,10 +153,10 @@ button {
 }
 @keyframes blinkingscreen {
   0% {
-    opacity: 0;
+    color: transparent;
   }
   100% {
-    opacity: 100%;
+    color: $activeColor;
   }
 }
 .display {
@@ -273,6 +277,17 @@ button {
           border: 2.5px $activeColor solid;
           border-radius: 10px;
           filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.25));
+        }
+      }
+
+      &--single:first-of-type {
+        &::before {
+          content: '';
+          position: absolute;
+          width: 33px;
+          height: 33px;
+          border: 2.5px $inactiveColor solid;
+          border-radius: 10px;
         }
       }
       &-pom {

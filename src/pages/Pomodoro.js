@@ -1,4 +1,6 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
+
 import Display from '../components/Display'
 import { start, pause, reset, mode, type, next } from '../features/timerSlice'
 import { useSelector, useDispatch } from 'react-redux'
@@ -27,6 +29,7 @@ function PomodoroPage() {
   const Dispatch = useDispatch()
   return (
     <div className='container'>
+      <Helmet></Helmet>
       <h1>Pomodoro Timer</h1>
 
       <Display />
