@@ -9,7 +9,7 @@ import { ReactComponent as PlayIcon } from '../assets/images/play-icon.svg'
 import '../app/soundController'
 import '../app/keyShortcuts'
 
-import { beep, playSound } from '../app/soundController'
+import { playSound } from '../app/soundController'
 import Footer from '../components/Footer'
 
 function PomodoroPage() {
