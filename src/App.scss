@@ -117,12 +117,13 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.05s linear;
+  transition: all 0.04s linear;
   -webkit-tap-highlight-color: transparent;
 
   &:active {
     background: linear-gradient(145deg, #dadada, #ffffff);
     box-shadow: none;
+    transform: translateY(3px);
   }
   &__icon {
     transform: translate(2px, 0px);
