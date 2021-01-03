@@ -4,7 +4,6 @@ import beepSound from '../assets/sounds/tone.ogg'
 import { subscribe } from 'redux-subscriber'
 
 export const alarm = new Audio(alarmSound)
-export const beep = new Audio(beepSound)
 
 var ns = 4 //The number of sounds to preload. This depends on how often the sounds need to be played, but if too big it will probably cause lond loading times.
 var sounds = [] //This will be a matrix of all the sounds
