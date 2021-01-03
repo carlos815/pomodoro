@@ -9,7 +9,7 @@ import { ReactComponent as PlayIcon } from '../assets/images/play-icon.svg'
 import '../app/soundController'
 import '../app/keyShortcuts'
 
-import { beep } from '../app/soundController'
+import { beep, playSound } from '../app/soundController'
 import Footer from '../components/Footer'
 
 function PomodoroPage() {
@@ -25,6 +25,7 @@ function PomodoroPage() {
       ? array[currentElementIndex + 1]
       : array[0]
   }
+  const pomTimeline = useSelector((state) => state.timer.timeline)
 
   const Dispatch = useDispatch()
   return (
@@ -40,20 +41,20 @@ function PomodoroPage() {
           <button
             className=' reset'
             onClick={() => {
-              beep.play()
-
+              playSound(0, 0.3)
               if (pomStatus !== 'idle') {
                 Dispatch(reset())
                 return
               }
               Dispatch(mode(findNextElementInArray(pomMode, modes)))
+              Dispatch(type(pomTimeline[0]))
             }}></button>
         </div>
 
         <button
           className='mainBtn'
           onClick={() => {
-            beep.play()
+            playSound(0, 0.3)
 
             if (pomStatus === 'running') {
               Dispatch(pause())
@@ -70,7 +71,7 @@ function PomodoroPage() {
           <button
             className=' switch'
             onClick={() => {
-              beep.play()
+              playSound(0, 0.3)
               if (pomMode === 'single') {
                 Dispatch(type(findNextElementInArray(pomType, types)))
               } else if (pomMode === 'auto') {
