@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ended } from '../features/timerSlice'
 import { minDigits } from '../common/minDigits'
-import { Helmet } from 'react-helmet'
 
 function Counter() {
   const [nowDate, setNowDate] = useState(Date.now())
@@ -48,7 +47,7 @@ function Counter() {
           case 'shortRest':
             result = `${counter} - Short Break`
             break
-          case 'default':
+          default:
             break
         }
         break
@@ -69,9 +68,11 @@ function Counter() {
           case 'shortRest':
             result = `Break over`
             break
-          case 'default':
+          default:
             break
         }
+        break
+      default:
         break
     }
     return result
