@@ -33,7 +33,6 @@ function Counter() {
   const secs = minDigits(pomTotalDateObj.getUTCSeconds().toString(), 2)
   const counter = `${mins}:${secs}`
   const title = (pomStatus, pomType, counter) => {
-    console.log('asdf')
     let result = 'Pomodoro'
     switch (pomStatus) {
       case 'running':

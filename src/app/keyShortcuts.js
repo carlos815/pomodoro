@@ -7,6 +7,7 @@ let keysPressed = {}
 document.addEventListener('keydown', (event) => {
   keysPressed[event.key] = true
   alarm.pause()
+  alarm.currentTime = 0
 
   // if (keysPressed['Control']) { //uncomment this to add support to multiple key listener
 
