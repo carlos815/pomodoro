@@ -7,9 +7,9 @@ const initialState = timerAdapter.getInitialState({
   setTo: 1500000,
   start: 0,
   total: 0,
-  pomodoro: 1,
-  longRest: 1,
-  shortRest: 1,
+  pomodoro: 1500000,
+  longRest: 600000,
+  shortRest: 300000,
   type: 'pomodoro',
   mode: 'auto',
   timeline: [
