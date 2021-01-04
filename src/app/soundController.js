@@ -2,6 +2,7 @@ import alarmSound from '../assets/sounds/alarm.ogg'
 import beepSound from '../assets/sounds/tone.ogg'
 
 import { subscribe } from 'redux-subscriber'
+import { displayNotification } from './notifications'
 
 export const alarm = new Audio(alarmSound)
 export const beep = new Audio(beepSound)
@@ -59,6 +60,7 @@ if (typeof alarm.loop === 'boolean') {
 subscribe('timer.status', (state) => {
   if (state.timer.status === 'ended') {
     alarm.play()
+    displayNotification('Timer Ended!')
   } else {
     stopSound(alarm)
   }

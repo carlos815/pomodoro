@@ -4,7 +4,7 @@ const timerAdapter = createEntityAdapter()
 
 const initialState = timerAdapter.getInitialState({
   status: 'idle',
-  setTo: 1500000,
+  setTo: 1,
   start: 0,
   total: 0,
   pomodoro: 1500000,

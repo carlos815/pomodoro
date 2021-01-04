@@ -8,7 +8,7 @@ import { ReactComponent as SkipIcon } from '../assets/images/skip-icon.svg'
 import { ReactComponent as PlayIcon } from '../assets/images/play-icon.svg'
 import '../app/soundController'
 import '../app/keyShortcuts'
-
+import '../app/notifications'
 import { playSound } from '../app/soundController'
 import Footer from '../components/Footer'
 
