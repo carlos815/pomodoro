@@ -1,5 +1,5 @@
 import { store } from '../app/store'
-import { start, mode, type, pause, next } from '../features/timerSlice'
+import { start, mode, type, pause, next, reset } from '../features/timerSlice'
 import { alarm, playSound } from './soundController'
 
 let keysPressed = {}
@@ -35,8 +35,7 @@ document.addEventListener('keydown', (event) => {
       break
     case 'r':
       event.preventDefault()
-      Dispatch(reset())
-
+      store.dispatch(reset())
       playSound(0, 0.3)
       break
     case ' ':
