@@ -1,6 +1,6 @@
 import { store } from '../app/store'
 import { start, mode, type, pause, next } from '../features/timerSlice'
-import { beep, alarm } from './soundController'
+import { alarm, playSound } from './soundController'
 
 let keysPressed = {}
 
@@ -17,25 +17,25 @@ document.addEventListener('keydown', (event) => {
       store.dispatch(type('pomodoro'))
       store.dispatch(mode('single'))
       store.dispatch(start())
-      beep.play()
+      playSound(0, 0.3)
       break
     case 'l':
       event.preventDefault()
       store.dispatch(type('longRest'))
       store.dispatch(mode('single'))
       store.dispatch(start())
-      beep.play()
+      playSound(0, 0.3)
       break
     case 's':
       event.preventDefault()
       store.dispatch(type('shortRest'))
       store.dispatch(mode('single'))
       store.dispatch(start())
-      beep.play()
+      playSound(0, 0.3)
       break
     case ' ':
       event.preventDefault()
-      beep.play()
+      playSound(0, 0.3)
       const pomStatus = store.getState().timer.status
 
       if (pomStatus === 'running') {

@@ -30,7 +30,7 @@ export const playSound = function (
 ) {
   if (vol <= 1 && vol >= 0) sounds[playing[id]][id].volume = vol
   else sounds[playing[id]][id].volume = 1
-
+  sounds[playing[id]][id].currentTime = 0
   sounds[playing[id]][id].play()
   ++playing[id] //Each time a sound is played, increment this so the next time that sound needs to be played, we play a different version of it,
 
