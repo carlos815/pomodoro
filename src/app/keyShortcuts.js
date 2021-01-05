@@ -33,6 +33,12 @@ document.addEventListener('keydown', (event) => {
       store.dispatch(start())
       playSound(0, 0.3)
       break
+    case 'r':
+      event.preventDefault()
+      Dispatch(reset())
+
+      playSound(0, 0.3)
+      break
     case ' ':
       event.preventDefault()
       playSound(0, 0.3)
