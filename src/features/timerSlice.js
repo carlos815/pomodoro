@@ -22,7 +22,7 @@ const initialState = timerAdapter.getInitialState({
     'pomodoro',
     'longRest',
   ],
-  historyShown: true,
+  historyShown: false,
   history: [],
 })
 
