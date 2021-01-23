@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ended } from '../features/timerSlice'
 import { minDigits } from '../common/minDigits'
+import { areSameDay } from '../common/isSameDay'
 
 function Counter() {
   const [nowDate, setNowDate] = useState(Date.now())
@@ -12,6 +13,8 @@ function Counter() {
   const pomSetTo = useSelector((state) => state.timer.setTo)
   const pomTotal = useSelector((state) => state.timer.total)
   const pomType = useSelector((state) => state.timer.type)
+  const pomHistory = useSelector((state) => state.timer.history)
+  const pomHistoryShown = useSelector((state) => state.timer.historyShown)
 
   let pomTotalDateObj
 
@@ -31,8 +34,65 @@ function Counter() {
 
   const mins = minDigits(pomTotalDateObj.getUTCMinutes().toString(), 2)
   const secs = minDigits(pomTotalDateObj.getUTCSeconds().toString(), 2)
-  const counter = `${mins}:${secs}`
+
+  let counter = pomHistoryShown
+    ? `P0:${minDigits(
+        pomHistory
+          .filter(
+            (entry) =>
+              entry.type === 'pomodoro' &&
+              areSameDay(new Date(), new Date(entry.timestamp)),
+          )
+          .length.toString(),
+        2,
+      )}`
+    : `${mins}:${secs}`
+  /* switch (pomMode) {
+    case 'single' || 'auto':
+      counter = `${mins}:${secs}`
+      break
+    case 'histPom':
+      counter = `P0:${minDigits(
+        pomHistory
+          .filter(
+            (entry) =>
+              entry.type === 'pomodoro' &&
+              areSameDay(new Date(), new Date(entry.timestamp)),
+          )
+          .length.toString(),
+        2,
+      )}`
+      break
+    case 'histLongR':
+      counter = `L0:${minDigits(
+        pomHistory
+          .filter(
+            (entry) =>
+              entry.type === 'longRest' &&
+              areSameDay(new Date(), new Date(entry.timestamp)),
+          )
+          .length.toString(),
+        2,
+      )}`
+      break
+    case 'histShortR':
+      counter = `SH:${minDigits(
+        pomHistory
+          .filter(
+            (entry) =>
+              entry.type === 'shortRest' &&
+              areSameDay(new Date(), new Date(entry.timestamp)),
+          )
+          .length.toString(),
+        2,
+      )}`
+      break
+    default:
+      break
+  }*/
+
   const title = (pomStatus, pomType, counter) => {
+    //This updates the browser tab title
     let result = 'Pomodoro'
     switch (pomStatus) {
       case 'running':
@@ -76,6 +136,7 @@ function Counter() {
     }
     return result
   }
+  document.title = title(pomStatus, pomType, counter)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,7 +145,6 @@ function Counter() {
     return () => clearInterval(interval)
   }, [])
 
-  document.title = title(pomStatus, pomType, counter)
   return (
     <h2 className='counter '>
       <span className={`display--active ${pomStatus}`}>{counter}</span>

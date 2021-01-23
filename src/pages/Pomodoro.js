@@ -2,7 +2,15 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 
 import Display from '../components/Display'
-import { start, pause, reset, mode, type, next } from '../features/timerSlice'
+import {
+  start,
+  pause,
+  reset,
+  mode,
+  type,
+  next,
+  setHistShown,
+} from '../features/timerSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { ReactComponent as SkipIcon } from '../assets/images/skip-icon.svg'
 import { ReactComponent as PlayIcon } from '../assets/images/play-icon.svg'
@@ -15,7 +23,6 @@ import Footer from '../components/Footer'
 function PomodoroPage() {
   const types = ['pomodoro', 'shortRest', 'longRest']
   const modes = ['auto', 'single']
-
   const pomStatus = useSelector((state) => state.timer.status)
   const pomType = useSelector((state) => state.timer.type)
   const pomMode = useSelector((state) => state.timer.mode)
@@ -26,31 +33,48 @@ function PomodoroPage() {
       : array[0]
   }
   const pomTimeline = useSelector((state) => state.timer.timeline)
-
   const Dispatch = useDispatch()
+
   return (
     <div className='container'>
       <Helmet></Helmet>
       <h1>Pomodoro Timer</h1>
-
       <Display />
-
       <div className='buttons'>
-        <div className='smallBtn reset'>
-          <div className='label'> RESET/ MODE</div>
-          <button
-            className=' reset'
-            onClick={() => {
-              playSound(0, 0.3)
-              if (pomStatus !== 'idle') {
-                Dispatch(reset())
-                return
-              }
-              Dispatch(mode(findNextElementInArray(pomMode, modes)))
-              Dispatch(type(pomTimeline[0]))
-            }}></button>
-        </div>
+        <div>
+          <div className='smallBtn reset'>
+            <div className='label'> RESET/ MODE</div>
+            <button
+              className=' reset'
+              onClick={() => {
+                playSound(0, 0.3)
+                if (pomStatus !== 'idle') {
+                  Dispatch(reset())
+                  return
+                }
+                Dispatch(mode(findNextElementInArray(pomMode, modes)))
+                Dispatch(type(pomTimeline[0]))
+              }}></button>
+          </div>
+          <div className='tinyBtn '>
+            <div className='label'>HISTORY</div>
+            <button
+              onMouseDown={() => {
+                playSound(0, 0.3)
 
+                Dispatch(setHistShown(true))
+
+                window.addEventListener(
+                  'mouseup',
+                  () => {
+                    playSound(0, 0.3)
+                    Dispatch(setHistShown(false))
+                  },
+                  { once: true },
+                )
+              }}></button>
+          </div>
+        </div>
         <button
           className='mainBtn'
           onClick={() => {
@@ -80,7 +104,7 @@ function PomodoroPage() {
               }
             }}></button>
         </div>
-      </div>
+      </div>{' '}
       <Footer></Footer>
     </div>
   )

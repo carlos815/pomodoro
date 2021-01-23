@@ -22,6 +22,8 @@ const initialState = timerAdapter.getInitialState({
     'pomodoro',
     'longRest',
   ],
+  historyShown: true,
+  history: [],
 })
 
 const timerSlice = createSlice({
@@ -70,6 +72,20 @@ const timerSlice = createSlice({
       state.setTo = 0
       state.start = 0
       state.total = 0
+      state.history.push({
+        type: state.type,
+        timestamp: Date.now(),
+      })
+    },
+    setHistShown(state, action) {
+      const historyState =
+        action.payload !== null
+          ? action.payload
+          : state.historyShown === true
+          ? false
+          : true
+
+      state.historyShown = historyState
     },
   },
 })
@@ -81,6 +97,7 @@ export const {
   type,
   next,
   ended,
+  setHistShown,
 } = timerSlice.actions
 
 export const timerReducer = timerSlice.reducer
