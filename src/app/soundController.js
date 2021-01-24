@@ -47,7 +47,7 @@ const stopSound = (sound) => {
 }
 
 alarm.volume = 0.3
-beep.volume = 0.3
+beep.volume = 0.15
 if (typeof alarm.loop === 'boolean') {
   alarm.loop = true
 } else {

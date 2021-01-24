@@ -6,8 +6,8 @@ export const requestNotificationPermition = () => {
 
 export const displayNotification = (text) => {
   if (Notification.permission === 'granted') {
-    navigator.serviceWorker.getRegistration().then(function (reg) {
-      reg.showNotification(text)
+    new Notification(text, {
+      icon: '../assets/images/logo192.png',
     })
   }
 }
