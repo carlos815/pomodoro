@@ -14,11 +14,17 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import { ReactComponent as SkipIcon } from '../assets/images/skip-icon.svg'
 import { ReactComponent as PlayIcon } from '../assets/images/play-icon.svg'
+import { ReactComponent as NotificationIcon } from '../assets/images/notification.svg'
+import { ReactComponent as HistoryIcon } from '../assets/images/history-icon.svg'
+
 import '../app/soundController'
 import '../app/keyShortcuts'
 import '../app/notifications'
 import { playSound } from '../app/soundController'
 import Footer from '../components/Footer'
+import findNextElementInArray from '../common/findNextElementInArray'
+import { resetBtnPress } from '../app/buttonActions'
+import { requestNotificationPermition } from '../app/notifications'
 
 function PomodoroPage() {
   const types = ['pomodoro', 'shortRest', 'longRest']
@@ -26,12 +32,7 @@ function PomodoroPage() {
   const pomStatus = useSelector((state) => state.timer.status)
   const pomType = useSelector((state) => state.timer.type)
   const pomMode = useSelector((state) => state.timer.mode)
-  const findNextElementInArray = (currentElement, array) => {
-    const currentElementIndex = array.findIndex((el) => el === currentElement)
-    return array[currentElementIndex + 1]
-      ? array[currentElementIndex + 1]
-      : array[0]
-  }
+
   const pomTimeline = useSelector((state) => state.timer.timeline)
   const Dispatch = useDispatch()
 
@@ -41,33 +42,38 @@ function PomodoroPage() {
       <h1>Pomodoro Timer</h1>
       <Display />
       <div className='buttons'>
-        <div>
-          <div className='smallBtn reset'>
+        <div className='buttons-column'>
+          <div className='smallBtn'>
             <div className='label'> RESET/ MODE</div>
             <button
-              className=' reset'
               onClick={() => {
-                playSound(0, 0.3)
-                if (pomStatus !== 'idle') {
-                  Dispatch(reset())
-                  return
-                }
-                Dispatch(mode(findNextElementInArray(pomMode, modes)))
-                Dispatch(type(pomTimeline[0]))
+                resetBtnPress(
+                  playSound,
+                  pomStatus,
+                  Dispatch,
+                  reset,
+                  mode,
+                  type,
+                  pomMode,
+                  modes,
+                  pomTimeline,
+                )
               }}></button>
           </div>
           <div className='tinyBtn '>
-            <div className='label'>HISTORY</div>
+            <div className='label'>
+              <HistoryIcon />
+            </div>
             <button
               onMouseDown={() => {
-                playSound(0, 0.3)
+                playSound(1)
 
                 Dispatch(setHistShown(true))
 
                 window.addEventListener(
                   'mouseup',
                   () => {
-                    playSound(0, 0.3)
+                    playSound(2)
                     Dispatch(setHistShown(false))
                   },
                   { once: true },
@@ -78,33 +84,50 @@ function PomodoroPage() {
         <button
           className='mainBtn'
           onClick={() => {
-            playSound(0, 0.3)
-
             if (pomStatus === 'running') {
+              playSound(3)
               Dispatch(pause())
             } else if (pomStatus === 'ended') {
+              playSound(1)
               Dispatch(next())
             } else {
+              playSound(4)
               Dispatch(start())
             }
           }}>
           <PlayIcon className={`mainBtn__icon ${pomStatus}`} />
         </button>
-        <div className='smallBtn next'>
-          <SkipIcon className='label' />
-          <button
-            className=' switch'
-            onClick={() => {
-              playSound(0, 0.3)
-              if (pomMode === 'single') {
-                Dispatch(type(findNextElementInArray(pomType, types)))
-              } else if (pomMode === 'auto') {
-                Dispatch(reset())
-                Dispatch(next())
-              }
-            }}></button>
+        <div className='buttons-column'>
+          <div className='smallBtn'>
+            <div className='label'>
+              <SkipIcon />
+            </div>
+            <button
+              onClick={() => {
+                playSound(2)
+                if (pomMode === 'single') {
+                  Dispatch(type(findNextElementInArray(pomType, types)))
+                } else if (pomMode === 'auto') {
+                  Dispatch(reset())
+                  Dispatch(next())
+                }
+              }}></button>
+          </div>
+          <div className='tinyBtn '>
+            <div className='label'>
+              <NotificationIcon />
+            </div>
+            <button
+              className={`${
+                Notification.permission === 'granted' ? 'active' : 'inactive'
+              }`}
+              onMouseDown={() => {
+                playSound(1)
+                requestNotificationPermition()
+              }}></button>
+          </div>
         </div>
-      </div>{' '}
+      </div>
       <Footer></Footer>
     </div>
   )

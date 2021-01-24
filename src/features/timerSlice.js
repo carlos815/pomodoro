@@ -44,6 +44,9 @@ const timerSlice = createSlice({
       state.setTo = state[state.type]
       state.start = 0
       state.total = 0
+      state.pomodoro = 1000
+      state.longRest = 1000
+      state.shortRest = 1000
     },
     mode(state, action) {
       state.status = 'idle'

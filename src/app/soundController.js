@@ -1,13 +1,16 @@
-import alarmSound from '../assets/sounds/alarm.ogg'
-import beepSound from '../assets/sounds/tone.ogg'
+import alarmFile from '../assets/sounds/alarm.ogg'
+import acceptFile from '../assets/sounds/accept.ogg'
+import backFile from '../assets/sounds/back.ogg'
+import pauseFile from '../assets/sounds/pause.ogg'
+import playFile from '../assets/sounds/play.ogg'
 
 import { subscribe } from 'redux-subscriber'
 import { displayNotification } from './notifications'
 
-export const alarm = new Audio(alarmSound)
-export const beep = new Audio(beepSound)
+export const alarm = new Audio(alarmFile)
+export const beep = new Audio(acceptFile)
 
-var ns = 4 //The number of sounds to preload. This depends on how often the sounds need to be played, but if too big it will probably cause lond loading times.
+var ns = 4 //The number of sounds to preload. This depends on how  often the sounds need to be played, but if too big it will probably cause lond loading times.
 var sounds = [] //This will be a matrix of all the sounds
 
 for (
@@ -16,7 +19,8 @@ for (
   i++ //We need to have ns different copies of each sound, hence:
 )
   sounds.push([])
-let soundSources = [beepSound]
+let soundSources = [alarmFile, acceptFile, backFile, pauseFile, playFile]
+
 for (let i = 0; i < soundSources.length; i++)
   for (let j = 0; j < ns; j++) sounds[j].push(new Audio(soundSources[i])) //Assuming that you hold your sound sauces in a "sources" array, for example ["bla.wav", "smile.dog" "scream.wav"]
 
@@ -26,7 +30,7 @@ for (let i = 0; i < soundSources.length; i++) playing[i] = 0
 
 export const playSound = function (
   id,
-  vol, //id in the sounds[i] array., vol is a real number in the [0, 1] interval
+  vol = 0.15, //id in the sounds[i] array., vol is a real number in the [0, 1] interval
 ) {
   if (vol <= 1 && vol >= 0) sounds[playing[id]][id].volume = vol
   else sounds[playing[id]][id].volume = 1

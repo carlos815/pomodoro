@@ -70,27 +70,32 @@ button {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
+.buttons-column {
+  display: flex;
+  flex-direction: column;
+}
 .smallBtn {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .label {
-    height: 40px;
-    margin-bottom: 10px;
-  }
-  &.reset .label {
+  & .label {
     align-self: center;
     justify-self: center;
     font-weight: 700;
     color: $font-color;
-
+    height: 50px;
     width: 57px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & svg {
+      height: 20px;
+      fill: #bdbdbd;
+    }
   }
-  &.next svg {
-    width: 30px;
-    fill: #bdbdbd;
-  }
+
   button {
     border: none;
     width: 57px;
@@ -122,8 +127,9 @@ button {
 
     width: 57px;
   }
-  &.next svg {
+  & svg {
     width: 30px;
+    height: 20px;
     fill: #bdbdbd;
   }
 
@@ -149,7 +155,8 @@ button {
       transform: translate(-50%, 50%);
     }
     -webkit-tap-highlight-color: transparent;
-    &:active {
+    &:active,
+    &.active {
       background: linear-gradient(145deg, #dadada, #ffffff);
       &::after {
         background: white;
@@ -316,7 +323,6 @@ button {
     justify-content: space-between;
     box-sizing: border-box;
     flex-wrap: wrap;
-    margin-bottom: 10px;
     &-item {
       margin-right: 3px;
       display: flex;

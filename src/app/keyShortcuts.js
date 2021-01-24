@@ -17,29 +17,29 @@ document.addEventListener('keydown', (event) => {
       store.dispatch(type('pomodoro'))
       store.dispatch(mode('single'))
       store.dispatch(start())
-      playSound(0, 0.3)
+      playSound(1)
       break
     case 'l':
       event.preventDefault()
       store.dispatch(type('longRest'))
       store.dispatch(mode('single'))
       store.dispatch(start())
-      playSound(0, 0.3)
+      playSound(1)
       break
     case 's':
       event.preventDefault()
       store.dispatch(type('shortRest'))
       store.dispatch(mode('single'))
       store.dispatch(start())
-      playSound(0, 0.3)
+      playSound(1)
       break
     case 'r':
       store.dispatch(reset())
-      playSound(0, 0.3)
+      playSound(1)
       break
     case ' ':
       event.preventDefault()
-      playSound(0, 0.3)
+      playSound(1)
       const pomStatus = store.getState().timer.status
 
       if (pomStatus === 'running') {
