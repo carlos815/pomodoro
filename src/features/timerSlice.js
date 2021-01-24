@@ -44,9 +44,16 @@ const timerSlice = createSlice({
       state.setTo = state[state.type]
       state.start = 0
       state.total = 0
-      state.pomodoro = 1000
-      state.longRest = 1000
-      state.shortRest = 1000
+      console.log(process.env.NODE_ENV)
+      if (process.env.NODE_ENV === 'development') {
+        state.pomodoro = 1000
+        state.longRest = 1000
+        state.shortRest = 1000
+      } else {
+        state.pomodoro = 1500000
+        state.longRest = 600000
+        state.shortRest = 300000
+      }
     },
     mode(state, action) {
       state.status = 'idle'
