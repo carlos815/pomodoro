@@ -47,49 +47,6 @@ function Counter() {
         2,
       )}`
     : `${mins}:${secs}`
-  /* switch (pomMode) {
-    case 'single' || 'auto':
-      counter = `${mins}:${secs}`
-      break
-    case 'histPom':
-      counter = `P0:${minDigits(
-        pomHistory
-          .filter(
-            (entry) =>
-              entry.type === 'pomodoro' &&
-              areSameDay(new Date(), new Date(entry.timestamp)),
-          )
-          .length.toString(),
-        2,
-      )}`
-      break
-    case 'histLongR':
-      counter = `L0:${minDigits(
-        pomHistory
-          .filter(
-            (entry) =>
-              entry.type === 'longRest' &&
-              areSameDay(new Date(), new Date(entry.timestamp)),
-          )
-          .length.toString(),
-        2,
-      )}`
-      break
-    case 'histShortR':
-      counter = `SH:${minDigits(
-        pomHistory
-          .filter(
-            (entry) =>
-              entry.type === 'shortRest' &&
-              areSameDay(new Date(), new Date(entry.timestamp)),
-          )
-          .length.toString(),
-        2,
-      )}`
-      break
-    default:
-      break
-  }*/
 
   const title = (pomStatus, pomType, counter) => {
     //This updates the browser tab title

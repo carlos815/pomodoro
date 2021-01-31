@@ -23,7 +23,7 @@ import '../app/notifications'
 import { playSound } from '../app/soundController'
 import Footer from '../components/Footer'
 import findNextElementInArray from '../common/findNextElementInArray'
-import { resetBtnPress } from '../app/buttonActions'
+import { resetBtnPress, historyBtnPress } from '../app/buttonActions'
 import { requestNotificationPermition } from '../app/notifications'
 
 function PomodoroPage() {
@@ -32,6 +32,7 @@ function PomodoroPage() {
   const pomStatus = useSelector((state) => state.timer.status)
   const pomType = useSelector((state) => state.timer.type)
   const pomMode = useSelector((state) => state.timer.mode)
+  const pomHistShown = useSelector((state) => state.timer.historyShown)
 
   const pomTimeline = useSelector((state) => state.timer.timeline)
   const Dispatch = useDispatch()
@@ -65,25 +66,17 @@ function PomodoroPage() {
               <HistoryIcon />
             </div>
             <button
+              className={`${pomHistShown ? 'active' : 'inactive'}`}
               onMouseDown={() => {
-                playSound(1)
-
-                Dispatch(setHistShown(true))
-
-                window.addEventListener(
-                  'mouseup',
-                  () => {
-                    playSound(2)
-                    Dispatch(setHistShown(false))
-                  },
-                  { once: true },
-                )
+                historyBtnPress(playSound, Dispatch, pomHistShown, setHistShown)
               }}></button>
           </div>
         </div>
         <button
           className='mainBtn'
           onClick={() => {
+            Dispatch(setHistShown(false))
+
             if (pomStatus === 'running') {
               playSound(3)
               Dispatch(pause())

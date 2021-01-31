@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { ReactComponent as TomatoIcon } from '../assets/images/tomato-icon.svg'
 import { ReactComponent as RestIcon } from '../assets/images/rest-icon.svg'
 import { ReactComponent as HistIcon } from '../assets/images/history-icon.svg'
+import { ReactComponent as MuteIcon } from '../assets/images/mute-icon.svg'
 
 import Timeline from './Timeline'
 import Counter from './Counter'
@@ -12,6 +13,7 @@ function Display() {
   const pomType = useSelector((state) => state.timer.type)
   const pomMode = useSelector((state) => state.timer.mode)
   const pomHistoryShown = useSelector((state) => state.timer.historyShown)
+  const pomSoundAvailable = useSelector((state) => state.timer.soundAvailable)
 
   return (
     <div className='display'>
@@ -33,6 +35,7 @@ function Display() {
             }`}>
             SINGLE
           </li>
+
           <li
             className={`
         display--${pomHistoryShown === true ? 'active' : 'inactive'}`}>
@@ -41,6 +44,12 @@ function Display() {
         display--${pomHistoryShown === true ? 'active' : 'inactive'}`}
             />
             HISTORY
+          </li>
+          <li
+            className={`display__mode-icon display--${
+              !pomSoundAvailable ? 'active' : 'inactive'
+            }`}>
+            <MuteIcon />
           </li>
         </ul>
       </div>

@@ -4,6 +4,7 @@ const timerAdapter = createEntityAdapter()
 
 const initialState = timerAdapter.getInitialState({
   status: 'idle',
+  soundAvailable: false,
   setTo: 1,
   start: 0,
   total: 0,
@@ -33,18 +34,21 @@ const timerSlice = createSlice({
     start(state) {
       state.status = 'running'
       state.start = Date.now() - state.total
+      state.historyShown = false
     },
     pause(state) {
       const now = Date.now()
       state.status = 'paused'
       state.total = now - state.start
+      state.historyShown = false
     },
     reset(state) {
       state.status = 'idle'
       state.setTo = state[state.type]
       state.start = 0
       state.total = 0
-      console.log(process.env.NODE_ENV)
+      state.historyShown = false
+
       if (process.env.NODE_ENV === 'development') {
         state.pomodoro = 1000
         state.longRest = 1000
@@ -60,6 +64,7 @@ const timerSlice = createSlice({
       state.start = 0
       state.total = 0
       state.mode = action.payload
+      state.historyShown = false
     },
     type(state, action) {
       state.status = 'idle'
@@ -67,6 +72,7 @@ const timerSlice = createSlice({
       state.total = 0
       state.type = action.payload
       state.setTo = state[state.type]
+      state.historyShown = false
     },
     next(state) {
       state.status = 'idle'
@@ -76,26 +82,29 @@ const timerSlice = createSlice({
       state.timeline.push(first)
       state.type = state.timeline[0]
       state.setTo = state[state.type]
+      state.historyShown = false
     },
     ended(state) {
       state.status = 'ended'
       state.setTo = 0
       state.start = 0
       state.total = 0
+      state.historyShown = false
       state.history.push({
         type: state.type,
         timestamp: Date.now(),
       })
     },
     setHistShown(state, action) {
+      //Safe to use as a toggle if it doesn't receive any payload
       const historyState =
-        action.payload !== null
-          ? action.payload
-          : state.historyShown === true
-          ? false
-          : true
-
+        action.payload === undefined ? !state.historyShown : action.payload
       state.historyShown = historyState
+    },
+    setSoundAvailable(state, action) {
+      const soundState =
+        action.payload === undefined ? !state.soundAvailable : action.payload
+      state.soundAvailable = soundState
     },
   },
 })
@@ -108,6 +117,7 @@ export const {
   next,
   ended,
   setHistShown,
+  setSoundAvailable,
 } = timerSlice.actions
 
 export const timerReducer = timerSlice.reducer

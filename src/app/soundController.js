@@ -3,7 +3,8 @@ import acceptFile from '../assets/sounds/accept.ogg'
 import backFile from '../assets/sounds/back.ogg'
 import pauseFile from '../assets/sounds/pause.ogg'
 import playFile from '../assets/sounds/play.ogg'
-
+import { store } from '../app/store'
+import { setSoundAvailable } from '../features/timerSlice'
 import { subscribe } from 'redux-subscriber'
 import { displayNotification } from './notifications'
 
@@ -35,7 +36,14 @@ export const playSound = function (
   if (vol <= 1 && vol >= 0) sounds[playing[id]][id].volume = vol
   else sounds[playing[id]][id].volume = 1
   sounds[playing[id]][id].currentTime = 0
-  sounds[playing[id]][id].play()
+  sounds[playing[id]][id]
+    .play()
+    .then(() => {
+      store.dispatch(setSoundAvailable(true))
+    })
+    .catch((e) => {
+      store.dispatch(setSoundAvailable(false))
+    })
   ++playing[id] //Each time a sound is played, increment this so the next time that sound needs to be played, we play a different version of it,
 
   if (playing[id] >= ns) playing[id] = 0
@@ -56,19 +64,47 @@ if (typeof alarm.loop === 'boolean') {
     function () {
       this.currentTime = 0
       this.play()
+        .then(() => {
+          store.dispatch(setSoundAvailable(true))
+        })
+        .catch((e) => {
+          store.dispatch(setSoundAvailable(false))
+        })
     },
     false,
   )
 }
 
-subscribe('timer.status', (state) => {
+const unsubscribe = subscribe('timer.status', (state) => {
+  //This mess is here to prevent an infinite loop triggered by some bug (I think) in the subscribe library
+  //The timerEndRoutine triggers this subscribe function, even though it doesn't modify the 'timer.status' value specified in the key 🤷,
+  //Triggering the subscribe function runs the timerEndRoutine again which triggers the subscriber function again...
+  //To prevent that loop we need to unsubscribe befor running the timerEndRoutine.
+  //The timerEndRoutine then, creates a new subscription and no harm done.
+  unsubscribe()
+  timerEndRoutine(state)
+})
+
+function timerEndRoutine(state) {
   if (state.timer.status === 'ended') {
-    alarm.play()
+    alarm
+      .play()
+      .then(() => {
+        store.dispatch(setSoundAvailable(true))
+      })
+      .catch((e) => {
+        store.dispatch(setSoundAvailable(false))
+      })
     displayNotification('Timer Ended!')
+    subscribe()
   } else {
     stopSound(alarm)
   }
-})
+  const unsubscribe = subscribe('timer.status', (state) => {
+    unsubscribe()
+    timerEndRoutine(state)
+  })
+}
 
 document.addEventListener('visibilitychange', function () {
   if (document.visibilityState === 'visible') {
@@ -79,3 +115,9 @@ document.addEventListener('visibilitychange', function () {
 document.addEventListener('click', function () {
   stopSound(alarm)
 })
+
+window.onload = function () {
+  //reproduce un sonido de silencio para ver si el navegador deja reproducir sonidos
+  //La funcion playSound se encarga de reportar al redux si falla
+  playSound(1, 0)
+}

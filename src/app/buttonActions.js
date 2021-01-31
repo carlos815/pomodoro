@@ -19,3 +19,16 @@ export const resetBtnPress = (
   dispatchFn(modeAction(findNextElementInArray(currentPomMode, modesArray)))
   dispatchFn(typeAction(pomTimeline[0]))
 }
+export const historyBtnPress = (
+  playSoundFn,
+  dispatchFn,
+  pomHistShown,
+  setHistShown,
+) => {
+  if (pomHistShown == true) {
+    playSoundFn(2)
+  } else {
+    playSoundFn(1)
+  }
+  dispatchFn(setHistShown())
+}
