@@ -25,7 +25,7 @@ export const historyBtnPress = (
   pomHistShown,
   setHistShown,
 ) => {
-  if (pomHistShown == true) {
+  if (pomHistShown === true) {
     playSoundFn(2)
   } else {
     playSoundFn(1)
