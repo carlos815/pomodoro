@@ -12,28 +12,28 @@ document.addEventListener('keydown', (event) => {
   // if (keysPressed['Control']) { //uncomment this to add support to multiple key listener
 
   switch (event.key) {
-    case 'p':
+    case 'p' || 'P':
       event.preventDefault()
       store.dispatch(type('pomodoro'))
       store.dispatch(mode('single'))
       store.dispatch(start())
       playSound(1)
       break
-    case 'l':
+    case 'l' || 'L':
       event.preventDefault()
       store.dispatch(type('longRest'))
       store.dispatch(mode('single'))
       store.dispatch(start())
       playSound(1)
       break
-    case 's':
+    case 's' || 'S':
       event.preventDefault()
       store.dispatch(type('shortRest'))
       store.dispatch(mode('single'))
       store.dispatch(start())
       playSound(1)
       break
-    case 'r':
+    case 'r' || 'R':
       store.dispatch(reset())
       playSound(1)
       break

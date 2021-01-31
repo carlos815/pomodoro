@@ -324,40 +324,19 @@ button {
     box-sizing: border-box;
     flex-wrap: wrap;
     &-item {
+      $clampVal: 7vw;
+      $itemSize: clamp(10px, $clampVal, 33px);
+
       margin-right: 3px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      width: 33px;
-      height: 33px;
-      padding: 0;
+      width: $itemSize;
+      height: $itemSize;
+      padding: 2px;
       box-sizing: border-box;
       border: 2px transparent solid;
-
-      /*    &--auto:first-of-type {
-        &::before {
-          content: '';
-          position: absolute;
-          width: 33px;
-          height: 33px;
-          border: 2.5px $activeColor solid;
-          border-radius: 10px;
-          filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.25));
-        }
-      }*/
-
-      /*  &--single:first-of-type {
-        &::before {
-          content: '';
-          position: absolute;
-          width: 33px;
-          height: 33px;
-          border: 2.5px $inactiveColor solid;
-          border-radius: 10px;
-        }
-      }*/
-
       &-border {
         &.display {
           &--inactive {
@@ -368,18 +347,19 @@ button {
           }
         }
         position: absolute;
-        width: 35px;
-        height: 35px;
+        width: calc(#{$itemSize} + 2px);
+        height: calc(#{$itemSize} + 2px);
         border-radius: 10px;
       }
 
       &-pom {
-        width: 23px;
       }
 
       &-rest {
-        width: 10px;
-        margin: 0 2px;
+        width: 40%;
+        &:nth-of-type(2) {
+          margin-right: auto;
+        }
       }
     }
   }
