@@ -295,7 +295,6 @@ button {
       margin: 0;
       //transform: translateY(5px);
       font-variant-numeric: tabular-nums;
-      padding-left: clamp(1px, 3vw, 21px);
       &::before {
         content: '88:88';
         position: absolute;
